@@ -5,4 +5,5 @@ streamlit-folium
 tensorflow==2.13.0
 numpy
 groq
+groq
 huggingface-hub
