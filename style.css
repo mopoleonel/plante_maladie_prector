@@ -1,0 +1,528 @@
+/* --- ROOT VARIABLES (couleurs pour le thème Sci-Fi Glow) --- */
+:root {
+    --sidebar-bg-dark: #121212; /* Noir profond pour le fond de la sidebar */
+    --primary-glow-color: #59ff00; /* Vert/Fluo éclatant pour la lueur primaire (comme la plante) */
+    --secondary-glow-color: #3cff00; /* Vert un peu plus foncé pour les accents secondaires */
+    --text-default: #E0E0E0; /* Gris clair par défaut */
+    --text-active: #121212; /* Texte très sombre sur fond lumineux */
+    --hover-gradient-start: rgba(89, 255, 0, 0.1); /* Début du dégradé de survol */
+    --hover-gradient-end: rgba(89, 255, 0, 0.4); /* Fin du dégradé de survol */
+    --logout-color: #FF6347;     /* Rouge tomate pour le déconnexion */
+    --logout-hover-bg: rgba(255, 99, 71, 0.2); /* Rouge semi-transparent au survol */
+
+    /* Variables pour le contenu principal de l'application */
+    --main-bg: #1A1A1A; /* Fond principal de l'application */
+    --card-bg: #2C2C2C; /* Fond des cartes */
+    --text-color: #E0E0E0; /* Couleur du texte général */
+    --border-color: #444444; /* Couleur des bordures */
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    background-color: var(--main-bg);
+    color: var(--text-color);
+}
+
+/* Styles généraux de l'application Streamlit */
+.stApp {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    /* Ajuste la marge supérieure pour éviter l'espace vide par défaut de Streamlit */
+    margin-top: -120px !important;
+}
+
+/* Sidebar - Conteneur principal de la barre latérale */
+div[data-testid="stSidebar"] {
+    background-color: var(--sidebar-bg-dark);
+    color: var(--text-default);
+    /* Ombre et bordure avec effet lumineux */
+    box-shadow: 2px 0 30px rgba(0, 255, 255, 0.5);
+    border-right: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+/* Conteneur du contenu scrollable de la sidebar - Enlève les paddings par défaut */
+div[data-testid="stSidebarContent"] {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Cibler le conteneur de l'image du logo (généré par st.image) */
+div[data-testid="stImage"] {
+    background-color: var(--primary-glow-color) !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+}
+
+div[data-testid="stImage"] img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    background-color: transparent !important;
+}
+
+/* --- Styles pour TOUS les boutons dans la sidebar --- */
+/* Cible directement l'élément <button> de Streamlit dans la sidebar */
+div[data-testid="stSidebar"] button[data-testid="stButton"] {
+    /* Styles de base que vous avez fournis */
+    color: #E0E0E0 !important;
+    font-weight: 600 !important;
+    padding: 15px 20px !important;
+    border-radius: 6px !important;
+    margin: 10px !important;
+    font-size: 1.1rem !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border: 2px solid rgba(0, 255, 255, 0.1) !important;
+    transition: all 0.3s ease-out !important;
+
+    /* Styles pour le positionnement interne des icônes et du texte */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* Aligner le contenu à gauche */
+    width: calc(100% - 20px) !important; /* Pleine largeur moins les marges de 10px de chaque côté */
+    text-align: left !important;
+    position: relative !important; /* Pour les pseudo-éléments (effets et icônes) */
+    overflow: hidden !important; /* Cache les débordements des effets */
+    z-index: 1 !important; /* Assure que le bouton est au-dessus des effets */
+}
+
+/* Cible le paragraphe de texte à l'intérieur du bouton Streamlit */
+div[data-testid="stSidebar"] button[data-testid="stButton"] > div > p {
+    color: #E0E0E0 !important; /* Couleur de texte que vous avez spécifiée */
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-grow: 1 !important; /* Permet au texte de prendre l'espace restant */
+    line-height: 1 !important; /* Aide à l'alignement vertical */
+}
+
+/* --- Styles de survol pour TOUS les boutons dans la sidebar --- */
+div[data-testid="stSidebar"] button[data-testid="stButton"]:hover {
+    /* Styles de survol que vous avez fournis */
+    background-color: rgba(0, 255, 255, 0.2) !important;
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5) !important;
+
+    /* Autres styles de survol pour les effets */
+    transform: translateY(-3px) !important; /* Léger soulèvement */
+    border-color: var(--primary-glow-color) !important; /* Bordure lumineuse */
+    color: #E0E0E0 !important; /* Garde la couleur de texte au survol */
+}
+
+/* Pseudo-éléments pour un effet de balayage ou de lueur interne au survol (sur tous les boutons) */
+div[data-testid="stSidebar"] button[data-testid="stButton"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Commence en dehors de l'écran */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--hover-gradient-end), transparent);
+    transition: left 0.5s ease-out !important;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+div[data-testid="stSidebar"] button[data-testid="stButton"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 20px var(--primary-glow-color), 0 0 30px var(--primary-glow-color);
+    opacity: 0; /* Commence invisible */
+    transition: opacity 0.3s ease-in-out !important;
+    z-index: -2;
+}
+
+div[data-testid="stSidebar"] button[data-testid="stButton"]:hover::before {
+    left: 100% !important; /* Balaye de gauche à droite */
+}
+
+div[data-testid="stSidebar"] button[data-testid="stButton"]:hover::after {
+    opacity: 1 !important; /* Apparaît au survol */
+}
+
+
+/* --- Styles pour les icônes Font Awesome via ::before --- */
+/* Chaque bouton est ciblé par son data-automation-key pour placer l'icône */
+/* Le 'content' est le code unicode de l'icône Font Awesome.
+   Utilisez Font Awesome Cheatsheet pour trouver d'autres codes :
+   https://fontawesome.com/v5/cheatsheet/free/solid
+*/
+
+/* Tableau de Bord */
+div[data-testid="stSidebar"] button[data-automation-key="nav_dashboard_btn"] > div > div::before {
+    font-family: "Font Awesome 5 Free"; /* Indique d'utiliser la police Font Awesome */
+    font-weight: 900; /* Important pour les icônes 'Solid' (fas) */
+    content: "\f0a0"; /* Code Unicode pour fas fa-project-diagram */
+    margin-right: 10px; /* Espace entre icône et texte */
+    color: #E0E0E0 !important; /* Couleur par défaut pour l'icône */
+    transition: color 0.3s ease-out !important;
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_dashboard_btn"]:hover > div > div::before {
+    animation: iconFloat 1.5s ease-in-out infinite alternate !important;
+    color: var(--primary-glow-color) !important; /* Couleur de l'icône au survol */
+}
+
+/* Analyser ma plante */
+div[data-testid="stSidebar"] button[data-automation-key="nav_analyse_plant_btn"] > div > div::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f0c6"; /* Code Unicode pour fas fa-paperclip */
+    margin-right: 10px;
+    color: #E0E0E0 !important;
+    transition: color 0.3s ease-out !important;
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_analyse_plant_btn"]:hover > div > div::before {
+    animation: iconFloat 1.5s ease-in-out infinite alternate !important;
+    color: var(--primary-glow-color) !important;
+}
+
+/* Chat */
+div[data-testid="stSidebar"] button[data-automation-key="nav_chat_btn"] > div > div::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f0ee"; /* Code Unicode pour fas fa-comment-dots */
+    margin-right: 10px;
+    color: #E0E0E0 !important;
+    transition: color 0.3s ease-out !important;
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_chat_btn"]:hover > div > div::before {
+    animation: iconFloat 1.5s ease-in-out infinite alternate !important;
+    color: var(--primary-glow-color) !important;
+}
+
+/* Déconnexion - Styles spécifiques */
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"] {
+    color: var(--logout-color) !important; /* Couleur du texte pour déconnexion */
+    margin-top: 1.5rem !important; /* Marge supérieure pour séparer */
+    background-color: rgba(255, 99, 71, 0.1) !important; /* Fond léger pour déconnexion */
+    border-color: rgba(255, 99, 71, 0.3) !important;
+    box-shadow: none !important; /* Pas d'ombre par défaut */
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"] > div > p {
+    color: var(--logout-color) !important; /* Force la couleur du texte pour déconnexion */
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"] > div > div::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f011"; /* Code Unicode pour fas fa-power-off */
+    margin-right: 10px;
+    color: var(--logout-color) !important;
+    transition: color 0.3s ease-out !important;
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"]:hover {
+    background-color: var(--logout-hover-bg) !important;
+    color: var(--logout-color) !important;
+    box-shadow: 0 5px 20px rgba(255, 99, 71, 0.4) !important;
+    border-color: var(--logout-color) !important;
+}
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"]:hover > div > div::before {
+    animation: none !important; /* Pas d'animation de flottement pour déconnexion */
+    color: var(--logout-color) !important;
+}
+/* Masque les effets de lueur au survol pour le bouton de déconnexion */
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"]:hover::after,
+div[data-testid="stSidebar"] button[data-automation-key="nav_logout_btn"]:hover::before {
+    opacity: 0 !important;
+    left: -100% !important; /* Cache le balayage */
+}
+
+/* Animation de flottement pour les icônes (réutilisable) */
+@keyframes iconFloat {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+/* --- Styles pour l'état actif (le plus délicat sans JavaScript) --- */
+/* Streamlit ajoute une classe comme 'st-emotion-cache-xxxxxxxx-selected' aux boutons actifs.
+   **VOUS DEVEZ TROUVER CETTE CLASSE EXACTE EN INSPECTANT LE DOM DE VOTRE APP STREALIT.**
+   1. Ouvrez votre app dans le navigateur.
+   2. Faites F12 (outils développeur).
+   3. Cliquez sur l'icône "sélectionner un élément" (souvent une flèche en haut à gauche des outils).
+   4. Cliquez sur un bouton de votre sidebar (par ex. "Tableau de Bord").
+   5. Dans la section "Éléments", regardez le code HTML du <button>.
+   6. Cherchez une classe qui ressemble à "st-emotion-cache-UN_HASH_ALPHANUMERIQUE-selected".
+      EXEMPLE : "st-emotion-cache-fsd040g-selected"
+   7. REMPLACEZ "st-emotion-cache-xyz-selected" CI-DESSOUS par la classe réelle que vous avez trouvée.
+*/
+div[data-testid="stSidebar"] button[data-testid="stButton"].st-emotion-cache-xyz-selected,
+/* Cette règle essaie de capturer l'état focus/cliqué si la classe -selected n'est pas trouvée
+   ou si vous voulez un effet instantané au clic. */
+div[data-testid="stSidebar"] button[data-testid="stButton"]:focus:not(:hover)
+{
+    background-color: var(--primary-glow-color) !important;
+    color: var(--text-active) !important;
+    font-weight: 800 !important;
+    box-shadow: 0 15px 40px rgb(13, 154, 53) !important; /* Ombre plus intense */
+    border-left: 12px solid var(--secondary-glow-color) !important; /* Bordure plus épaisse à gauche */
+    transform: translateX(0) scale(1.05) !important; /* Léger grossissement */
+    margin-left: 13px !important; /* Ajuste la marge pour la bordure épaisse */
+    padding-left: 20px !important; /* Ajuste le padding pour la bordure épaisse */
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Transition avec overshoot */
+    text-shadow: 0 0 8px var(--text-active) !important; /* Ombre de texte */
+}
+
+/* Styles pour le texte et les icônes du bouton actif */
+div[data-testid="stSidebar"] button[data-testid="stButton"].st-emotion-cache-xyz-selected > div > p,
+div[data-testid="stSidebar"] button[data-testid="stButton"]:focus:not(:hover) > div > p {
+    color: var(--text-active) !important;
+}
+div[data-testid="stSidebar"] button[data-testid="stButton"].st-emotion-cache-xyz-selected > div > div::before,
+div[data-testid="stSidebar"] button[data-testid="stButton"]:focus:not(:hover) > div > div::before {
+    color: var(--text-active) !important;
+    animation: none !important; /* Désactive l'animation de l'icône lorsqu'il est actif */
+}
+/* Masque les effets de survol pour les boutons actifs */
+div[data-testid="stSidebar"] button[data-testid="stButton"].st-emotion-cache-xyz-selected::before,
+div[data-testid="stSidebar"] button[data-testid="stButton"].st-emotion-cache-xyz-selected::after,
+div[data-testid="stSidebar"] button[data-testid="stButton"]:focus:not(:hover)::before,
+div[data-testid="stSidebar"] button[data-testid="stButton"]:focus:not(:hover)::after {
+    display: none !important;
+    opacity: 0 !important;
+    transition: none !important;
+}
+
+
+/* --- Styles pour les autres sections de l'application (inchangés ou ajustés si nécessaire) --- */
+/* Cartes d'information sur le tableau de bord */
+.info-card {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px 0 rgba(0, 255, 255, 0.1), 0 1px 2px -1px rgba(0, 255, 255, 0.05);
+    transition: all 0.2s ease-in-out;
+    text-decoration: none; /* Enlève le soulignement des liens */
+    color: var(--text-color);
+    height: 100%;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.info-card:hover {
+    transform: translateY(-7px); /* Soulèvement au survol */
+    box-shadow: 0 10px 15px -3px rgba(0, 255, 255, 0.3), 0 4px 6px -4px rgba(0, 255, 255, 0.2);
+}
+
+.info-card .value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-glow-color);
+    line-height: 1;
+    margin-bottom: 0 !important;
+}
+
+.info-card .label {
+    font-size: 0.9rem;
+    color: var(--text-default);
+    font-weight: 500;
+}
+
+.info-card .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background-color: var(--secondary-glow-color);
+    border-radius: 50%;
+    color: var(--text-active);
+    box-shadow: 0 2px 10px rgba(0, 255, 255, 0.4);
+}
+
+.info-card .icon-container i {
+    font-size: 2.5rem;
+}
+
+/* Masquer le header par défaut de Streamlit (le petit menu hamburger) */
+[data-testid="stHeader"] { display: none !important; }
+
+/* Réinitialisations de marge/padding pour les éléments Streamlit (peut aider à contrôler les espaces) */
+div[data-testid="stVerticalBlock"] > div:nth-child(1),
+div[data-testid="stVerticalBlock"] > div:nth-child(2),
+div[data-testid="stVerticalBlock"] > div:nth-child(3),
+div[data-testid="stVerticalBlock"] > div:nth-child(4),
+div[data-testid="stVerticalBlock"] > div:nth-child(5)
+{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+hr {
+    border-top: 1px solid var(--border-color) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Styles pour les titres (utilisés pour "Assistant Virtuel") */
+h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+}
+h3 svg { /* Style pour l'icône à l'intérieur du h3 */
+    color: var(--primary-color);
+    margin-right: 0.5rem; /* Espace entre l'icône et le texte */
+}
+
+/* Chatbot specific styles */
+.chat-window {
+    background: rgba(30, 30, 50, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    max-height: 500px; /* Limite la hauteur de la fenêtre de chat */
+    overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem !important; /* Réduit la marge supérieure de la fenêtre de chat */
+    border: 1px solid var(--border-dark);
+}
+.message-bubble {
+    padding: 0.8rem 1.2rem;
+    border-radius: 1.2rem;
+    max-width: 60%; /* Réduit la largeur maximale pour mieux voir le centrage */
+    word-wrap: break-word;
+    font-size: 0.95rem;
+    margin: 0.5rem auto; /* Centre la bulle horizontalement et ajoute un petit espace vertical */
+    text-align: left; /* Aligne le texte à gauche dans la bulle centrée */
+}
+.user-message {
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+    border-bottom-right-radius: 0.3rem; /* Arrondis spécifiques pour la bulle utilisateur */
+}
+.bot-message {
+    background-color: rgba(60, 60, 90, 0.7);
+    color: var(--text-light);
+    border: 1px solid var(--border-dark);
+    border-bottom-left-radius: 0.3rem; /* Arrondis spécifiques pour la bulle du bot */
+}
+
+/* Style pour les icônes de message (👤 et 🤖) */
+.message-icon {
+    margin-right: 8px; /* Espace entre l'icône et le texte du message */
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+/* Streamlit input fields (pour la zone de texte du chatbot) */
+.stTextInput > div > div > input {
+    background-color: rgba(40, 40, 60, 0.5) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-light) !important;
+    border-radius: 0.75rem !important;
+    padding: 0.8rem 1.2rem !important;
+}
+.stTextInput > div > div > input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.3) !important;
+}
+
+/* Labels des champs d'entrée */
+.stTextInput label {
+    color: var(--text-light) !important;
+    font-weight: 500 !important;
+    margin-bottom: 0.6rem !important;
+    display: block !important;
+}
+
+/* Streamlit Button Overrides (pour le bouton "Envoyer Message") */
+.stButton button {
+    background-color: var(--primary-color) !important;
+    color: var(--background-dark) !important;
+    border: none !important;
+    padding: 0.8rem 2.2rem !important;
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 8px 20px rgba(21, 212, 0, 0.3) !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+}
+.stButton button:hover {
+    background-color: #35a700 !important; /* Cyan plus foncé */
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 25px rgba(42, 212, 0, 0.4) !important;
+}
+.stButton button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 5px 15px rgba(28, 212, 0, 0.3) !important;
+}
+
+/* Styles spécifiques pour les boutons de formulaire (comme le bouton d'envoi du chatbot) */
+div[data-testid="stForm"] > form > div > div > button {
+    background-color: var(--primary-color) !important;
+    color: var(--background-dark) !important;
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease !important;
+    box-shadow: 0 8px 20px rgba(7, 212, 0, 0.3) !important;
+}
+div[data-testid="stForm"] > form > div > div > button:hover {
+    background-color: #3da700 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 25px rgba(0, 212, 21, 0.708) !important;
+}
+
+/* Styles pour les messages d'information, de succès, d'erreur et d'avertissement de Streamlit */
+div[data-testid="stAlert"] div[data-baseweb="toast"] {
+    border-radius: 0.75rem !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+    backdrop-filter: blur(5px) !important;
+    color: var(--text-light) !important; /* Assure que le texte est lisible */
+}
+div[data-testid="stAlert"] div[data-baseweb="toast"][data-kind="info"] {
+    background-color: rgba(47, 243, 33, 0.2) !important; /* Bleu info avec transparence */
+    border-color: var(--info-color) !important;
+}
+div[data-testid="stAlert"] div[data-baseweb="toast"][data-kind="success"] {
+    background-color: rgba(36, 173, 41, 0.2) !important; /* Vert succès avec transparence */
+    border-color: var(--success-color) !important;
+}
+div[data-testid="stAlert"] div[data-baseweb="toast"][data-kind="error"] {
+    background-color: rgba(244, 67, 54, 0.2) !important; /* Rouge erreur avec transparence */
+    border-color: var(--error-color) !important;
+}
+div[data-testid="stAlert"] div[data-baseweb="toast"][data-kind="warning"] { /* Ajouté pour les messages d'avertissement */
+    background-color: rgba(255, 152, 0, 0.2) !important; /* Orange avertissement avec transparence */
+    border-color: var(--warning-color) !important;
+}
+
+/* Barre latérale (où se trouve le bouton "Effacer l'historique du Chatbot") */
+.st-emotion-cache-vk33gh { /* Cette classe cible la barre latérale elle-même */
+    background-color: rgba(25, 25, 40, 0.9) !important; /* Légèrement plus sombre que la carte */
+    backdrop-filter: blur(15px) !important;
+    border-right: 1px solid var(--border-dark) !important;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.4) !important;
+}
+
+/* Style pour le texte d'aide "Ou enregistrez votre voix :" */
+h4 {
+    color: var(--text-light); /* Couleur du texte claire */
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+}
