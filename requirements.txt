@@ -1,9 +1,8 @@
-folium
-groq
-numpy
-Pillow
 streamlit
-streamlit_folium
-streamlit_folium
-tensorflow
-tensorflow_intel
+Pillow
+folium
+streamlit-folium
+tensorflow==2.10.0
+numpy
+groq
+huggingface-hub
