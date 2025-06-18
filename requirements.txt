@@ -1,0 +1,9 @@
+folium
+groq
+numpy
+Pillow
+streamlit
+streamlit_folium
+streamlit_folium
+tensorflow
+tensorflow_intel
