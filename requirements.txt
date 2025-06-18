@@ -1,7 +1,7 @@
+groq 
 streamlit
 Pillow
 folium
 streamlit-folium
-tensorflow==2.13.0   
-groq==0.28.0     
+tensorflow==2.13.0      
 huggingface-hub
