@@ -1,4 +1,4 @@
-groq 
+groq==0.28.0
 streamlit
 Pillow
 folium
