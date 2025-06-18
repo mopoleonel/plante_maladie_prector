@@ -2,7 +2,7 @@ streamlit
 Pillow
 folium
 streamlit-folium
-tensorflow
+tensorflow==2.13.0
 numpy
 groq
 huggingface-hub
